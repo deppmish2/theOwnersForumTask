@@ -1,0 +1,8 @@
+event_id,event_name,city,region,event_date,event_type,status,description
+E001,Berlin Manufacturing Forum,Berlin,Europe,2026-09-18,Forum,confirmed,Fictional forum for member guests in industrial manufacturing and automation
+E002,Berlin Family Enterprise Dinner,Berlin,Europe,2026-09-17,Dinner,confirmed,Fictional dinner adjacent to the Berlin Manufacturing Forum
+E003,Asia Ownership Transition Roundtable,Singapore,Asia,2026-10-09,Roundtable,confirmed,Fictional roundtable on succession governance and ownership transition in Asian family enterprises
+E004,Singapore Member Dinner,Singapore,Asia,2026-10-10,Dinner,planned,Fictional member dinner hosted during the Asia ownership program
+E005,Singapore Planning Dinner,Singapore,Asia,2026-09-05,Dinner,planned,Fictional smaller planning dinner for hosts and program leads
+E006,Tokyo Precision Manufacturing Visit,Tokyo,Asia,2026-11-12,Site visit,planned,Fictional visit focused on precision manufacturing and automation suppliers
+E007,Munich Data Infrastructure Briefing,Munich,Europe,2026-08-27,Briefing,confirmed,Fictional briefing on industrial infrastructure suppliers serving data center facilities

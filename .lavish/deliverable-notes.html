@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Owners Forum Assistant: Deliverable Notes</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/daisyui.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/themes.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.2.4/dist/index.global.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --gold-head:#ffcf4d;
+      --gold-body:#ecdcb4;
+      --gold-mute:#c9b78d;
+      --ink-bg:#16130e;
+      --ink-card:#201b14;
+      --line:#3a3226;
+      --ok:#7fd18a;
+      --warn:#ffc06b;
+    }
+    html { scroll-behavior:smooth; }
+    body, body * {
+      font-family:'Atkinson Hyperlegible', ui-sans-serif, system-ui, sans-serif !important;
+    }
+    body, .bg-base-100 { background-color:var(--ink-bg) !important; }
+    .cardish, .bg-base-200 { background-color:var(--ink-card) !important; }
+    .gold-head { color:var(--gold-head) !important; }
+    .gold-body { color:var(--gold-body) !important; }
+    .gold-mute { color:var(--gold-mute) !important; }
+    .line { border-color:var(--line) !important; }
+    .navlink {
+      display:block;
+      padding:.45rem .7rem;
+      border-radius:.5rem;
+      color:var(--gold-mute) !important;
+      font-size:.95rem;
+    }
+    .navlink:hover {
+      background:#ffcf4d14;
+      color:var(--gold-head) !important;
+    }
+    .kicker { letter-spacing:.16em; }
+    section[id] { scroll-margin-top:1rem; }
+    ul.tight li { margin-top:.45rem; }
+    code {
+      background:#ffcf4d1a;
+      border-radius:.3rem;
+      padding:0 .3em;
+      font-family:ui-monospace, SFMono-Regular, Menlo, monospace !important;
+    }
+  </style>
+  <script>
+    function cleanCopy(text) {
+      if (text == null) return text;
+      return String(text).replace(/[—–-]/g, " ");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(node => {
+        if (!node.parentElement) return;
+        if (["SCRIPT", "STYLE"].includes(node.parentElement.tagName)) return;
+        node.textContent = cleanCopy(node.textContent);
+      });
+      document.title = cleanCopy(document.title);
+    });
+  </script>
+</head>
+<body>
+  <div data-theme="luxury" class="min-h-screen bg-base-100 text-base-content">
+    <div class="drawer lg:drawer-open">
+      <input id="navdrawer" type="checkbox" class="drawer-toggle">
+
+      <div class="drawer-content">
+        <div class="navbar bg-base-200 lg:hidden sticky top-0 z-20">
+          <label for="navdrawer" class="btn btn-ghost btn-sm">☰ Notes</label>
+          <span class="ml-2 font-semibold text-sm gold-body">Deliverable Notes</span>
+        </div>
+
+        <main class="mx-auto max-w-3xl px-6 py-10 lg:px-12 lg:py-14">
+          <header class="mb-10">
+            <p class="kicker text-xs font-semibold uppercase mb-3 gold-head">
+              Senior AI Engineer · Case Study Deliverable
+            </p>
+            <h1 class="text-4xl font-bold leading-tight mb-3 gold-head">Deliverable Notes</h1>
+
+            <div class="stats stats-vertical sm:stats-horizontal shadow mt-6 bg-base-200 w-full">
+              <div class="stat py-3">
+                <div class="stat-title text-xs gold-mute">Eval</div>
+                <div class="stat-value text-xl" style="color:var(--ok)">52/52</div>
+                <div class="stat-desc text-xs gold-mute">checks passing</div>
+              </div>
+              <div class="stat py-3">
+                <div class="stat-title text-xs gold-mute">Prompts</div>
+                <div class="stat-value text-xl gold-head">15</div>
+                <div class="stat-desc text-xs gold-mute">fixed regression set</div>
+              </div>
+              <div class="stat py-3">
+                <div class="stat-title text-xs gold-mute">Surfaces</div>
+                <div class="stat-value text-xl gold-head">3</div>
+                <div class="stat-desc text-xs gold-mute">web · CLI · eval</div>
+              </div>
+            </div>
+          </header>
+
+          <section id="architecture" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 gold-head">1 · Architecture</h2>
+            <ul class="list-disc pl-5 tight gold-body">
+              <li>Structured retrieval over 7 CSVs: resolve entities, join rows, apply policy, then compose a cited answer.</li>
+              <li>No vector RAG: the dataset is small and ID-driven, so deterministic joins are simpler and more exact.</li>
+              <li>The LLM layer is optional and post-gate only; it improves style, but does not retrieve or decide policy.</li>
+              <li><code>policy.py</code> is the single rules file for visibility, sensitivity, staleness, and evidence labels.</li>
+            </ul>
+          </section>
+
+          <section id="context" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 gold-head">2 · Context &amp; Memory</h2>
+            <ul class="list-disc pl-5 tight gold-body">
+              <li>Context is session-scoped and in-process only: last resolved entities plus an in-memory note store.</li>
+              <li>Pronoun carry-over happens only when the new turn resolves nothing and the wording clearly refers back.</li>
+              <li>Clarify follow-ups resume the original question when the user replies with a record id or short disambiguator.</li>
+              <li>Notes that match no dataset entity stay unlinked rather than being attached by guesswork.</li>
+            </ul>
+          </section>
+
+          <section id="retrieval" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 gold-head">3 · Retrieval Strategy</h2>
+            <ul class="list-disc pl-5 tight gold-body">
+              <li>All CSVs are loaded into memory with primary-key indexes and explicit join helpers.</li>
+              <li>Entity resolution is tiered: record ids first, then exact names, then limited partial-name fallbacks.</li>
+              <li>Ambiguity is a first-class result; the assistant asks instead of picking a candidate.</li>
+              <li>Thematic questions use structured filters, negation checks, and evidence-quality checks rather than semantic similarity.</li>
+            </ul>
+          </section>
+
+          <section id="session" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 gold-head">4 · Session Notes</h2>
+            <ul class="list-disc pl-5 tight gold-body">
+              <li>Session notes live in a separate append-only store and are never written back into the CSVs.</li>
+              <li>They use a separate citation namespace like <code>SN001</code> and always render as session-only, unverified material.</li>
+              <li>Notes are surfaced alongside dataset facts, not merged into them.</li>
+              <li>When possible, a note links to resolved entity ids; otherwise it is stored unlinked.</li>
+            </ul>
+          </section>
+
+          <section id="decision" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 gold-head">5 · Decision Logic</h2>
+            <ul class="list-disc pl-5 tight gold-body">
+              <li><b>Answer:</b> enough grounded evidence, no unresolved ambiguity, citations attached to each claim.</li>
+              <li><b>Clarify:</b> multiple matching people, accounts, or events, so the assistant shows options and waits.</li>
+              <li><b>Refuse:</b> restricted contact detail or unsupported claim; it says why rather than going quiet.</li>
+              <li><b>Escalate:</b> sensitive or restricted material is in scope, so content is withheld and human review is flagged.</li>
+              <li>Weak, stale, low-reliability, or explicitly denied evidence is shown with caveats instead of being silently dropped.</li>
+            </ul>
+          </section>
+
+          <section id="evaluation" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 gold-head">6 · Evaluation Plan</h2>
+            <ul class="list-disc pl-5 tight gold-body">
+              <li>The 15 provided prompts are the fixed regression set, and every run writes a transcript for review.</li>
+              <li>52 automated checks cover privacy, citation behavior, ambiguity, thematic filtering, and RSVP/contact edge cases.</li>
+              <li>The suite is aimed at judgment failures, not just crashes: wrong-yet-plausible answers are the main target.</li>
+              <li>Next additions would be per-claim citation audits, prompt-injection tests, and a small human usefulness pass.</li>
+            </ul>
+          </section>
+
+          <section id="privacy" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 gold-head">7 · Privacy &amp; Limitations</h2>
+            <ul class="list-disc pl-5 tight gold-body">
+              <li>Contact visibility is enforced in code before composition, so restricted details never depend on prompt compliance.</li>
+              <li>Restricted records are filtered before the optional LLM layer, so withheld content never enters model context.</li>
+              <li><code>policy.py</code> keeps the rule layer explicit, so privacy and sensitivity handling stays readable in code.</li>
+              <li>This is a trusted-internal prototype, not a multi-tenant system; real deployment would need caller auth and role-aware policy.</li>
+              <li>Intent detection is still keyword-based, so unusual phrasing should eventually move to a classifier with confidence thresholds.</li>
+            </ul>
+          </section>
+
+          <footer class="pt-6 border-t line gold-mute text-sm">
+            Source of record: <code>solution/NOTES.md</code> · Runnable surfaces:
+            <code>python3 -m solution.web.server</code>, <code>python3 -m solution.assistant.cli</code>,
+            <code>python3 solution/eval/run_eval.py</code>.
+          </footer>
+        </main>
+      </div>
+
+      <div class="drawer-side">
+        <label for="navdrawer" class="drawer-overlay"></label>
+        <nav class="w-72 min-h-full bg-base-200 border-r line px-4 py-6">
+          <div class="text-xs uppercase tracking-[0.18em] mb-4 gold-mute">Seven Notes</div>
+          <a class="navlink" href="#architecture">1 · Architecture</a>
+          <a class="navlink" href="#context">2 · Context &amp; Memory</a>
+          <a class="navlink" href="#retrieval">3 · Retrieval Strategy</a>
+          <a class="navlink" href="#session">4 · Session Notes</a>
+          <a class="navlink" href="#decision">5 · Decision Logic</a>
+          <a class="navlink" href="#evaluation">6 · Evaluation Plan</a>
+          <a class="navlink" href="#privacy">7 · Privacy &amp; Limitations</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

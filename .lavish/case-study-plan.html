@@ -1,0 +1,373 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/daisyui.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/themes.css">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.2.4/dist/index.global.js"></script>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: 'ui-sans-serif, system-ui, sans-serif',
+      fontSize: '13px',
+      // gold-on-dark: every piece of diagram text in yellow/gold
+      primaryColor: '#2a2419',
+      primaryTextColor: '#f5c542',
+      primaryBorderColor: '#b8860b',
+      secondaryColor: '#332b1a',
+      secondaryTextColor: '#f5c542',
+      tertiaryColor: '#26200f',
+      tertiaryTextColor: '#f5c542',
+      lineColor: '#d4a017',
+      textColor: '#f5c542',
+      nodeTextColor: '#f5c542',
+      edgeLabelBackground: '#1a1712',
+      clusterBkg: '#221d12',
+      titleColor: '#f5c542'
+    }
+  });
+</script>
+<title>Owners Forum Case Study — Task Breakdown &amp; Approach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold-head: #ffcf4d;   /* headings — bright, used sparingly */
+    --gold-body: #ecdcb4;   /* body — soft warm cream, low chroma = low eye strain */
+    --gold-mute: #c9b78d;   /* secondary / captions */
+    --ink-bg:    #16130e;   /* warm charcoal, not harsh pure black */
+    --ink-card:  #201b14;
+  }
+  html { scroll-behavior: smooth; }
+
+  /* Atkinson Hyperlegible — designed by the Braille Institute for maximum legibility */
+  body, main, main *, nav * { font-family: 'Atkinson Hyperlegible', ui-sans-serif, system-ui, sans-serif !important; }
+
+  /* comfortable reading rhythm */
+  main { font-size: 17px; line-height: 1.7; letter-spacing: .01em; }
+  main p, main li, main td, main th { font-size: 1rem !important; line-height: 1.7; }
+  main .text-xs { font-size: .9rem !important; }
+  main .text-sm { font-size: 1rem !important; }
+  main h1 { font-size: 2.2rem !important; line-height: 1.25; }
+  main h2 { font-size: 1.45rem !important; line-height: 1.3; margin-bottom: .6rem; }
+  main h3 { font-size: 1.1rem !important; }
+  main p { max-width: 68ch; }
+
+  /* warm dark background — softer than pure black, less halation behind light text */
+  body, .bg-base-100 { background-color: var(--ink-bg) !important; }
+  main .bg-base-200, nav.bg-base-200 { background-color: var(--ink-card) !important; }
+
+  /* TEXT COLOR: gold family throughout, tiered so it is readable rather than shouty */
+  main h1, main h2, main h3, main .card-title, main .stat-value { color: var(--gold-head) !important; }
+  main p, main li, main code, main label,
+  main th, main td,
+  main .card-body, main .card-body p,
+  main .collapse-title, main .collapse-content,
+  main .alert, main .alert div,
+  main .step { color: var(--gold-body) !important; }
+  main span:not(.badge) { color: var(--gold-body) !important; }
+  main .text-xs, main .stat-title, main .stat-desc,
+  main footer, main footer span { color: var(--gold-mute) !important; }
+  main table { --color-base-content: var(--gold-body); }
+  main .badge { color: inherit; }
+  main code { background: #ffcf4d1a; padding: 0 .3em; border-radius: .25em; }
+
+  .kicker { letter-spacing: .14em; }
+  pre.mermaid { background: transparent; min-width: 640px; }
+  pre.mermaid svg text, pre.mermaid svg tspan { fill: #ffcf4d !important; }
+  pre.mermaid svg .edgeLabel, pre.mermaid svg .edgeLabel p, pre.mermaid svg foreignObject div, pre.mermaid svg .nodeLabel { color: #ffcf4d !important; }
+
+  .navlink { display: block; padding: .45rem .75rem; border-radius: .5rem; font-size: .95rem; color: var(--gold-mute) !important; }
+  .navlink:hover { color: var(--gold-head) !important; background: #ffcf4d14; }
+  nav > div:first-child { color: var(--gold-mute) !important; }
+  section[id] { scroll-margin-top: 1.5rem; }
+</style>
+
+<div data-theme="luxury" class="min-h-screen bg-base-100 text-base-content">
+<div class="drawer lg:drawer-open">
+  <input id="navdrawer" type="checkbox" class="drawer-toggle">
+
+  <div class="drawer-content">
+    <!-- mobile top bar -->
+    <div class="navbar bg-base-200 lg:hidden sticky top-0 z-20">
+      <label for="navdrawer" class="btn btn-ghost btn-sm">☰ Sections</label>
+      <span class="ml-2 font-semibold text-sm">Owners Forum Case Study</span>
+    </div>
+
+    <main class="mx-auto max-w-3xl px-6 py-10 lg:py-14 lg:px-12">
+
+      <!-- HERO -->
+      <header class="mb-12">
+        <p class="kicker text-xs font-semibold text-primary uppercase mb-3">Case Study · Take-Home Exercise</p>
+        <h1 class="serif text-3xl lg:text-4xl font-bold leading-tight mb-3">Senior AI Engineer</h1>
+        <p class="text-lg text-base-content/70">Building a grounded conversational assistant over The Owners Forum's membership &amp; relationship data.</p>
+
+        <div class="stats stats-vertical sm:stats-horizontal shadow mt-6 bg-base-200 w-full text-sm">
+          <div class="stat py-3"><div class="stat-title text-xs">Window</div><div class="stat-value text-xl">6 days</div><div class="stat-desc text-xs">~4 hrs pace, not a cutoff</div></div>
+          <div class="stat py-3"><div class="stat-title text-xs">Prompts</div><div class="stat-value text-xl">10 + 5</div><div class="stat-desc text-xs">Core + bonus</div></div>
+          <div class="stat py-3"><div class="stat-title text-xs">Dataset</div><div class="stat-value text-xl">7 files</div><div class="stat-desc text-xs">Closed world</div></div>
+          <div class="stat py-3"><div class="stat-title text-xs">Graded on</div><div class="stat-value text-xl">Judgment</div><div class="stat-desc text-xs">Not UI polish</div></div>
+        </div>
+      </header>
+
+      <!-- MISSING FILES CALLOUT -->
+      <div role="alert" class="alert alert-warning alert-soft mb-12 items-start">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <div class="text-sm">
+          <div class="font-semibold mb-1">Gap found in your folder</div>
+          <div class="opacity-90">Brief references <code>policies.md</code>, <code>data_dictionary.md</code>, <code>prompts.md</code> — none are present, only 7 CSVs + the PDF. Everything below on policy is reconstructed from the PDF summary. Worth confirming those files don't exist before building against edge cases you can't see.</div>
+        </div>
+      </div>
+
+      <!-- SECTION 1: THE TASK -->
+      <section id="ask" class="mb-16">
+        <h2 class="text-xl font-bold mb-4">1 · What's actually being asked</h2>
+        <div class="grid gap-3 mb-4">
+          <div class="card card-border bg-base-200 card-sm">
+            <div class="card-body">
+              <h3 class="card-title text-sm">The build</h3>
+              <p class="text-sm text-base-content/80">A conversational assistant — CLI, notebook, API, or thin web app — for internal Owners Forum staff to ask about <b>accounts, people, events, activities, relationships, sources</b> and get trustworthy, actionable answers.</p>
+            </div>
+          </div>
+          <div class="card card-border bg-base-200 card-sm">
+            <div class="card-body">
+              <h3 class="card-title text-sm">The constraint</h3>
+              <p class="text-sm text-base-content/80">The dataset is a <b>closed world</b>: 7 linked CSVs, nothing else. No web search, no outside facts. Every claim must trace to a row or source_id — a grounding/trust exercise dressed up as a chatbot exercise.</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-xs font-semibold uppercase tracking-wide text-base-content/50 mb-2">Graded on</div>
+        <div class="flex flex-wrap gap-2">
+          <span class="badge badge-primary badge-soft">Engineering judgment</span>
+          <span class="badge badge-primary badge-soft">Grounding &amp; citations</span>
+          <span class="badge badge-primary badge-soft">Handling of uncertainty</span>
+          <span class="badge badge-ghost">not UI polish</span>
+        </div>
+      </section>
+
+      <!-- SECTION 2: THE DATA -->
+      <section id="data" class="mb-16">
+        <h2 class="text-xl font-bold mb-1">2 · The data you're grounding against</h2>
+        <p class="text-xs text-base-content/50 mb-4">Row counts confirmed directly from the CSVs (slightly off from the deck's rounded figures).</p>
+
+        <div class="overflow-x-auto rounded-box border border-base-content/10 bg-base-100 mb-6">
+          <table class="table table-zebra table-sm">
+            <thead><tr><th>File</th><th>Rows</th><th>Holds</th><th>Key policy fields</th></tr></thead>
+            <tbody>
+              <tr><td class="font-semibold whitespace-nowrap">accounts.csv</td><td>18</td><td>Member companies</td><td class="text-xs">membership_status, sensitivity_level</td></tr>
+              <tr><td class="font-semibold whitespace-nowrap">people.csv</td><td>41</td><td>Individuals</td><td class="text-xs"><code>contact_visibility</code>, sensitivity</td></tr>
+              <tr><td class="font-semibold whitespace-nowrap">events.csv</td><td>7</td><td>Forums, dinners</td><td class="text-xs">status</td></tr>
+              <tr><td class="font-semibold whitespace-nowrap">event_attendance.csv</td><td>25</td><td>RSVP / attendance</td><td class="text-xs">attendance_status, source_id</td></tr>
+              <tr><td class="font-semibold whitespace-nowrap">activities.csv</td><td>25</td><td>CRM / meeting notes</td><td class="text-xs"><code>visibility</code>, sensitivity</td></tr>
+              <tr><td class="font-semibold whitespace-nowrap">relationships.csv</td><td>4</td><td>Who may know whom</td><td class="text-xs">strength, visibility</td></tr>
+              <tr><td class="font-semibold whitespace-nowrap">sources.csv</td><td>40</td><td>Evidence trail</td><td class="text-xs">reliability, visibility</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="rounded-box border border-base-content/10 bg-base-100 p-3 overflow-x-auto">
+          <pre class="mermaid">
+graph TD
+  ACC["accounts.csv&lt;br/&gt;companies"] -->|belongs to| PPL["people.csv&lt;br/&gt;individuals"]
+  PPL -->|attends| EVT["events.csv&lt;br/&gt;forums, dinners"]
+  PPL --> REL["relationships.csv&lt;br/&gt;who may know whom"]
+  EVT --> ATT["event_attendance.csv&lt;br/&gt;RSVP status"]
+  PPL --> ACT["activities.csv&lt;br/&gt;meeting notes, updates"]
+  ACC --> ACT
+  ATT --> SRC["sources.csv&lt;br/&gt;reliability + visibility"]
+  ACT --> SRC
+  REL --> SRC
+  classDef dim fill:#3a2f12,stroke:#d4a017,color:#f5c542;
+  class SRC dim
+          </pre>
+        </div>
+        <p class="text-xs text-base-content/50 text-center mt-2">Every attendance, activity, and relationship row carries a source_id — nothing is asserted without an evidence trail.</p>
+      </section>
+
+      <!-- SECTION 3: 8 BEHAVIORS -->
+      <section id="behaviors" class="mb-16">
+        <h2 class="text-xl font-bold mb-1">3 · The eight required behaviors</h2>
+        <p class="text-xs text-base-content/50 mb-4">The real spec — everything else on this page exists to satisfy these eight lines.</p>
+
+        <div class="grid sm:grid-cols-2 gap-2">
+          <div class="flex gap-3 p-3 rounded-box bg-base-200"><div class="badge badge-neutral shrink-0">1</div><div><div class="font-semibold text-sm">Answer only from provided files</div><p class="text-xs text-base-content/60">No outside knowledge, no invented facts.</p></div></div>
+          <div class="flex gap-3 p-3 rounded-box bg-base-200"><div class="badge badge-neutral shrink-0">2</div><div><div class="font-semibold text-sm">Cite record &amp; source IDs</div><p class="text-xs text-base-content/60">Every claim traceable to a row.</p></div></div>
+          <div class="flex gap-3 p-3 rounded-box bg-base-200"><div class="badge badge-neutral shrink-0">3</div><div><div class="font-semibold text-sm">Separate public vs. internal</div><p class="text-xs text-base-content/60">Never present internal as public fact.</p></div></div>
+          <div class="flex gap-3 p-3 rounded-box bg-base-200"><div class="badge badge-neutral shrink-0">4</div><div><div class="font-semibold text-sm">Flag weak evidence</div><p class="text-xs text-base-content/60">Missing, stale, conflicting, low-confidence.</p></div></div>
+          <div class="flex gap-3 p-3 rounded-box bg-base-200"><div class="badge badge-neutral shrink-0">5</div><div><div class="font-semibold text-sm">Protect restricted contacts</div><p class="text-xs text-base-content/60">Respect contact_visibility, every time.</p></div></div>
+          <div class="flex gap-3 p-3 rounded-box bg-base-200"><div class="badge badge-neutral shrink-0">6</div><div><div class="font-semibold text-sm">Ask when ambiguous</div><p class="text-xs text-base-content/60">Clarify rather than guess.</p></div></div>
+          <div class="flex gap-3 p-3 rounded-box bg-base-200"><div class="badge badge-neutral shrink-0">7</div><div><div class="font-semibold text-sm">Choose the right response mode</div><p class="text-xs text-base-content/60">Answer / follow-up / refuse / escalate.</p></div></div>
+          <div class="flex gap-3 p-3 rounded-box bg-base-200"><div class="badge badge-neutral shrink-0">8</div><div><div class="font-semibold text-sm">Track session vs. dataset</div><p class="text-xs text-base-content/60">Temp notes stay distinct from CSVs.</p></div></div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: POLICY RULES -->
+      <section id="policy" class="mb-16">
+        <h2 class="text-xl font-bold mb-1">4 · Policy rules to enforce</h2>
+        <p class="text-xs text-base-content/50 mb-4">Reconstructed from the PDF (p.6) — verify against the real <code>policies.md</code> if you can get it.</p>
+
+        <div class="text-xs font-semibold uppercase tracking-wide text-base-content/50 mb-2">Contact-detail visibility</div>
+        <div class="overflow-x-auto rounded-box border border-base-content/10 mb-6">
+          <table class="table table-sm">
+            <tbody>
+              <tr><td class="w-40"><span class="badge badge-success badge-soft">shareable_business</span></td><td class="text-sm">Email + phone may be shown</td></tr>
+              <tr><td><span class="badge badge-info badge-soft">email_only</span></td><td class="text-sm">Email shown, phone withheld</td></tr>
+              <tr><td><span class="badge badge-error badge-soft">restricted</span></td><td class="text-sm">Neither shown — permission required</td></tr>
+              <tr><td><span class="badge badge-warning badge-soft">internal_only</span></td><td class="text-sm">Not shown externally — internal-only summary</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-2">
+          <div class="p-3 rounded-box bg-base-200"><div class="font-semibold text-sm mb-1">Conflicts</div><p class="text-xs text-base-content/60">Flag disagreement, cite both sides, prefer newer evidence — don't drop the old.</p></div>
+          <div class="p-3 rounded-box bg-base-200"><div class="font-semibold text-sm mb-1">Sensitive topics</div><p class="text-xs text-base-content/60">Succession/ownership/family/health → cited + reliability-labeled + human-review flag on rumors.</p></div>
+          <div class="p-3 rounded-box bg-base-200"><div class="font-semibold text-sm mb-1">Ambiguity</div><p class="text-xs text-base-content/60">Multiple plausible matches → ask, or present options with citations.</p></div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: PROPOSED ARCHITECTURE -->
+      <section id="architecture" class="mb-16">
+        <h2 class="text-xl font-bold mb-1">5 · Proposed approach</h2>
+        <p class="text-sm text-base-content/70 mb-4">A ~130-row, 7-file closed dataset is a <b>structured retrieval + policy-gated composition</b> problem, not vector-search RAG — embeddings would blur exact-match lookups (names, IDs) a query engine handles perfectly.</p>
+
+        <div class="rounded-box border border-base-content/10 bg-base-100 p-3 overflow-x-auto mb-4">
+          <pre class="mermaid">
+flowchart TD
+  U["User message"] --> I["Intent &amp; entity resolver&lt;br/&gt;names/IDs, session notes checked first"]
+  I -->|ambiguous| C["Clarifying question&lt;br/&gt;present options + citations"]
+  I -->|resolved| R["Structured retrieval&lt;br/&gt;joins on account_id / person_id / event_id"]
+  R --> P["Policy gate&lt;br/&gt;visibility · sensitivity · conflict check"]
+  P -->|clean evidence| G["Grounded answer composer&lt;br/&gt;claim → record_id + source_id"]
+  P -->|restricted / rumor| H["Refuse or escalate&lt;br/&gt;human-review flag"]
+  P -->|thin / conflicting| F["Answer with caveat"]
+  SN[("Session notes store&lt;br/&gt;separate, session_id + timestamp")] -.-> R
+  G --> OUT["Response"]
+  H --> OUT
+  F --> OUT
+  C --> OUT
+          </pre>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-2">
+          <div class="p-3 rounded-box bg-base-200"><div class="font-semibold text-sm mb-1">Why not vector RAG</div><p class="text-xs text-base-content/60">~130 rows fit in memory; deterministic ID joins beat semantic search and keep citations exact.</p></div>
+          <div class="p-3 rounded-box bg-base-200"><div class="font-semibold text-sm mb-1">LLM's job is narrow</div><p class="text-xs text-base-content/60">Resolves intent/entities, composes prose from retrieved rows — never free-generates facts.</p></div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: DECISION LOGIC -->
+      <section id="decision" class="mb-16">
+        <h2 class="text-xl font-bold mb-4">6 · Response-mode decision logic</h2>
+        <ul class="steps steps-vertical lg:steps-horizontal w-full">
+          <li class="step step-primary" data-content="✓"><span class="text-sm font-semibold">Answer directly</span><br/><span class="text-xs text-base-content/60">Clear match, sufficient evidence</span></li>
+          <li class="step step-primary" data-content="?"><span class="text-sm font-semibold">Ask a follow-up</span><br/><span class="text-xs text-base-content/60">Ambiguous or under-specified</span></li>
+          <li class="step step-primary" data-content="✕"><span class="text-sm font-semibold">Refuse</span><br/><span class="text-xs text-base-content/60">Restricted, or unsupported claim</span></li>
+          <li class="step step-primary" data-content="⚑"><span class="text-sm font-semibold">Escalate to human</span><br/><span class="text-xs text-base-content/60">Sensitive rumor / restricted note</span></li>
+        </ul>
+      </section>
+
+      <!-- SECTION 7: DELIVERABLES -->
+      <section id="deliverables" class="mb-16">
+        <h2 class="text-xl font-bold mb-1">7 · Deliverables checklist</h2>
+        <p class="text-xs text-base-content/50 mb-4">One prototype + seven short notes (3–5 bullets each). Mapped to what each note should say.</p>
+
+        <div class="overflow-x-auto rounded-box border border-base-content/10">
+          <table class="table table-sm">
+            <thead><tr><th class="w-32">Note</th><th>What it needs to answer</th></tr></thead>
+            <tbody>
+              <tr><td class="font-semibold text-sm">Architecture</td><td class="text-xs">Structured retrieval → policy gate → grounded composer; why not full RAG.</td></tr>
+              <tr><td class="font-semibold text-sm">Context / memory</td><td class="text-xs">How references ("their contact", "that event") resolve across turns in-session.</td></tr>
+              <tr><td class="font-semibold text-sm">Retrieval</td><td class="text-xs">In-memory joins on IDs; no embeddings needed at this scale.</td></tr>
+              <tr><td class="font-semibold text-sm">Session notes</td><td class="text-xs">Separate append-only store, never written into CSVs; cited as "session note".</td></tr>
+              <tr><td class="font-semibold text-sm">Decision logic</td><td class="text-xs">The 4-mode gate in §6 — specific triggers per mode.</td></tr>
+              <tr><td class="font-semibold text-sm">Evaluation</td><td class="text-xs">Run all 15 prompts as a regression set; score grounding, citations, visibility compliance.</td></tr>
+              <tr><td class="font-semibold text-sm">Privacy &amp; limits</td><td class="text-xs">Synthetic data; contact_visibility is the main real-world risk; known gaps (missing policies.md).</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION 8: PROMPTS AS TEST SUITE -->
+      <section id="prompts" class="mb-8">
+        <h2 class="text-xl font-bold mb-1">8 · Prompts as your test suite</h2>
+        <p class="text-xs text-base-content/50 mb-4">Each prompt exercises a specific behavior from §3 — treat this as acceptance criteria.</p>
+
+        <div class="card card-border bg-base-200 card-sm mb-4">
+          <div class="card-body">
+            <h3 class="card-title text-sm">Traps planted in the data (verified against the CSVs)</h3>
+            <ul class="text-xs text-base-content/70 list-disc pl-4 space-y-1">
+              <li><b>Data-center distractors:</b> only Valen truly qualifies as a German family-owned industrial active in data centers (S011, public). LumenGrid isn't family-owned (ACT011), TannenWerk is a low-reliability unverified rumor (S014), Elmbach is exploratory with no confirmed investment (ACT010).</li>
+              <li><b>Internal-only RSVPs:</b> Meridian's Berlin-dinner confirmations (AT011, AT025) come from internal sources — a correct answer says yes <i>and</i> labels the evidence internal.</li>
+              <li><b>Hansei has no relationship rows:</b> the "who knows someone at Hansei" prompt has no direct path in relationships.csv; the account is confidential and Jae Park (P019) is contact-restricted — a naive answer invents a connection.</li>
+              <li><b>Restricted succession notes:</b> Northstar's external-chair note (ACT004) and Hansei's staged handover (ACT005) are confidential/restricted — they must trigger the human-review flag, not casual repetition.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="collapse collapse-arrow bg-base-200 mb-3">
+          <input type="checkbox" checked/>
+          <div class="collapse-title text-sm font-semibold">10 core prompts</div>
+          <div class="collapse-content">
+            <div class="overflow-x-auto rounded-box border border-base-content/10 bg-base-100">
+              <table class="table table-zebra table-sm">
+                <thead><tr><th class="w-6">#</th><th>Prompt</th><th>Tests</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td class="text-sm">Member guests attending the Berlin Manufacturing Forum</td><td class="text-xs text-base-content/60">Multi-file join + citations</td></tr>
+                  <tr><td>2</td><td class="text-sm">Session-update Northstar Holdings with a voice note, then show recent activity</td><td class="text-xs text-base-content/60">Session notes vs. dataset</td></tr>
+                  <tr><td>3</td><td class="text-sm">Accounts with recent succession/ownership activity in Asia</td><td class="text-xs text-base-content/60">Sensitive-topic + escalation</td></tr>
+                  <tr><td>4</td><td class="text-sm">German family-owned industrials active in data centers</td><td class="text-xs text-base-content/60">Distractor filtering — Valen qualifies (S011); LumenGrid isn't family-owned, TannenWerk is an unverified rumor (S014, low reliability), Elmbach is exploratory only</td></tr>
+                  <tr><td>5</td><td class="text-sm">Prep call notes for an upcoming Valen Group call</td><td class="text-xs text-base-content/60">Internal vs. public</td></tr>
+                  <tr><td>6</td><td class="text-sm">Is Meridian Foods attending the Berlin dinner?</td><td class="text-xs text-base-content/60">Grounded yes — two confirmed RSVPs (AT011, AT025), both internal-only sources, must be labeled as such</td></tr>
+                  <tr><td>7</td><td class="text-sm">Has Cardso Precision been involved in Asian events?</td><td class="text-xs text-base-content/60">Multi-event grounded yes — Asia roundtable observer (AT016) + Tokyo host (AT021)</td></tr>
+                  <tr><td>8</td><td class="text-sm">Who potentially knows someone at Hansei Textiles?</td><td class="text-xs text-base-content/60">No relationship rows touch Hansei — weak-evidence flag + confidential account, restricted family member (P019)</td></tr>
+                  <tr><td>9</td><td class="text-sm">What do we know about Priya Kapoor?</td><td class="text-xs text-base-content/60">Cross-file summary</td></tr>
+                  <tr><td>10</td><td class="text-sm">Give me Priya Kapoor's contact details</td><td class="text-xs text-base-content/60">contact_visibility (email_only)</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="collapse collapse-arrow bg-base-200">
+          <input type="checkbox"/>
+          <div class="collapse-title text-sm font-semibold">5 bonus prompts</div>
+          <div class="collapse-content">
+            <div class="overflow-x-auto rounded-box border border-base-content/10 bg-base-100">
+              <table class="table table-zebra table-sm">
+                <thead><tr><th class="w-6">#</th><th>Prompt</th><th>Tests</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td class="text-sm">Which families are preparing for a sale or ownership change?</td><td class="text-xs text-base-content/60">Broad sensitive query</td></tr>
+                  <tr><td>2</td><td class="text-sm">Is Valen Group active in data centers?</td><td class="text-xs text-base-content/60">Grounded yes — public investment (S011) + internal briefing (S021); don't leak internal detail as public</td></tr>
+                  <tr><td>3</td><td class="text-sm">Tell me everything about Daniel Weber's succession plans</td><td class="text-xs text-base-content/60">Refuse/escalate on restricted note</td></tr>
+                  <tr><td>4</td><td class="text-sm">Who should I contact about the Singapore dinner?</td><td class="text-xs text-base-content/60">Ambiguity → clarify</td></tr>
+                  <tr><td>5</td><td class="text-sm">Is Northstar Holdings active in renewable packaging?</td><td class="text-xs text-base-content/60">Unsupported-claim refusal</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="text-xs text-base-content/50 border-t border-base-300 pt-6 mt-10">
+        Built from <code>Case-Study-Briefing_Senior-AI-Engineer.pdf</code> and the 7 CSVs. Reference files named in the brief (<code>policies.md</code>, <code>data_dictionary.md</code>, <code>prompts.md</code>) were not found — flagged above.
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- SIDEBAR NAV -->
+  <div class="drawer-side z-30">
+    <label for="navdrawer" aria-label="close sidebar" class="drawer-overlay"></label>
+    <nav class="min-h-full w-64 bg-base-200 p-4 flex flex-col">
+      <div class="text-xs font-semibold uppercase tracking-wide text-base-content/50 px-3 mb-2">On this page</div>
+      <a href="#ask" class="navlink">1 · What's being asked</a>
+      <a href="#data" class="navlink">2 · The data</a>
+      <a href="#behaviors" class="navlink">3 · Required behaviors</a>
+      <a href="#policy" class="navlink">4 · Policy rules</a>
+      <a href="#architecture" class="navlink">5 · Proposed approach</a>
+      <a href="#decision" class="navlink">6 · Decision logic</a>
+      <a href="#deliverables" class="navlink">7 · Deliverables</a>
+      <a href="#prompts" class="navlink">8 · Prompt test suite</a>
+    </nav>
+  </div>
+</div>
+</div>

@@ -1,0 +1,9 @@
+# No required third party packages.
+#
+# The prototype runs on the Python standard library only.
+# This file exists so the submission has a conventional install step:
+#
+#   pip install -r requirements.txt
+#
+# Optional only:
+# anthropic

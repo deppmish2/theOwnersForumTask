@@ -1,0 +1,26 @@
+attendance_id,event_id,person_id,account_id,attendance_status,attendee_category,rsvp_date,source_id,notes
+AT001,E001,P001,A001,confirmed,member_guest,2026-07-12,S001,Confirmed member guest for Berlin Manufacturing Forum
+AT002,E001,P004,A001,confirmed,member_guest,2026-07-12,S001,Confirmed next-generation member guest
+AT003,E001,P007,A004,confirmed,member_guest,2026-07-09,S024,Confirmed member guest from Valen Group
+AT004,E001,P010,A005,confirmed,member_guest,2026-07-10,S025,Confirmed member guest from Elmbach Robotics
+AT005,E001,P014,A010,confirmed,member_guest,2026-07-11,S026,Confirmed member guest from Veyra Mobility
+AT006,E001,P016,A003,confirmed,member_guest,2026-07-08,S027,Confirmed member guest from Cardso Precision
+AT007,E001,P039,,confirmed,staff,2026-07-07,S028,Internal program lead attending
+AT008,E001,P040,,confirmed,external_speaker,2026-07-06,S029,External speaker not a member guest
+AT009,E001,P018,A007,waitlisted,member_guest,2026-07-13,S030,Waitlisted and should not count as attending
+AT010,E001,P026,A011,declined,member_guest,2026-07-14,S031,Declined and should not count as attending
+AT011,E002,P005,A002,confirmed,member_guest,2026-07-22,S008,Initial confirmed RSVP for Berlin dinner
+AT025,E002,P006,A002,confirmed,member_guest,2026-07-25,S009,Second confirmed Meridian Foods RSVP for Berlin dinner
+AT012,E002,P007,A004,confirmed,member_guest,2026-07-18,S032,Confirmed member guest for Berlin dinner
+AT013,E002,P039,,confirmed,staff,2026-07-18,S028,Staff attending dinner
+AT014,E003,P018,A007,confirmed,member_guest,2026-07-15,S033,Confirmed participant in Asia ownership roundtable
+AT015,E003,P020,A008,confirmed,member_guest,2026-07-16,S034,Confirmed participant in Asia ownership roundtable
+AT016,E003,P016,A003,confirmed,observer,2026-07-17,S035,Cardso Precision observer at Asia roundtable
+AT017,E004,P030,A014,confirmed,host,2026-07-19,S036,Host contact for Singapore Member Dinner
+AT018,E004,P031,A014,confirmed,event_contact,2026-07-19,S036,Local logistics contact for Singapore Member Dinner
+AT019,E004,P001,A001,invited,member_guest,2026-07-20,S037,Invited but not confirmed
+AT020,E005,P031,A014,confirmed,event_contact,2026-07-20,S038,Contact for separate Singapore Planning Dinner
+AT021,E006,P016,A003,confirmed,host_member,2026-07-21,S015,Cardso Precision hosting Tokyo site visit
+AT022,E006,P017,A003,confirmed,event_contact,2026-07-21,S015,Operations contact for Tokyo site visit
+AT023,E007,P007,A004,confirmed,member_guest,2026-07-23,S039,Valen Group attending Munich data infrastructure briefing
+AT024,E007,P010,A005,confirmed,member_guest,2026-07-23,S040,Elmbach Robotics attending Munich data infrastructure briefing

@@ -1,0 +1,5 @@
+relationship_id,from_person_id,from_account_id,to_person_id,to_account_id,relationship_type,strength,basis,visibility,source_id,notes
+REL007,P016,A003,P010,A005,manufacturing_peer,strong,Mika Sato and Timo Elmbach exchanged notes after a precision manufacturing visit,internal,S047,Useful for Cardso/Elmbach event context
+REL008,P031,A014,P039,,event_coordination,strong,Mei Tan coordinates Singapore event logistics with internal program lead Amira Holt,internal,S038,Relevant for Singapore dinner contact questions
+REL009,P009,A004,P008,A004,governance_reporting,strong,Daniel Weber reports governance planning options to Gregor Valen,restricted,S017,Restricted succession context
+REL010,P012,A006,P007,A004,market_briefing,moderate,Maren Schulz briefed Elise Valen on digital infrastructure markets,internal,S021,Relevant to Valen data center evidence

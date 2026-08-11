@@ -1,0 +1,42 @@
+person_id,full_name,account_id,role_title,relationship_to_company,is_family_member,generation,email,phone,contact_visibility,bio_note,sensitivity_level
+P001,Priya Kapoor,A001,Managing Director,Family executive,yes,Second generation,priya.kapoor@northstar.example,+65-555-0101,email_only,Leads Northstar Holdings family office coordination and selected industrial-services initiatives,standard
+P002,Alex Chen,A001,Chief Operating Officer,Executive,no,n/a,alex.chen@northstar.example,+65-555-0102,shareable_business,Oversees operating-company coordination and event preparation for Northstar Holdings,standard
+P003,Hana Okafor,A001,Head of Family Office,Executive,no,n/a,hana.okafor@northstar.example,+65-555-0103,internal_only,Coordinates family office reporting and meeting preparation for Northstar Holdings,confidential
+P004,Tomasz Reed,A001,Next Generation Representative,Family member,yes,Third generation,tomasz.reed@northstar.example,+65-555-0104,shareable_business,Participates in next-generation programming and manufacturing forums,standard
+P005,Leona Vettori,A002,Chair,Family executive,yes,Second generation,leona.vettori@meridian.example,+39-555-0201,shareable_business,Chairs Meridian Foods and attends European member dinners when available,standard
+P006,Matteo Vettori,A002,Commercial Director,Family executive,yes,Third generation,matteo.vettori@meridian.example,+39-555-0202,email_only,Works on customer partnerships and ingredient-market expansion,standard
+P007,Elise Valen,A004,Managing Partner,Family executive,yes,Third generation,elise.valen@valen.example,+49-555-0401,shareable_business,Leads new infrastructure-related business lines at Valen Group,standard
+P008,Gregor Valen,A004,Family Council Chair,Family member,yes,Second generation,gregor.valen@valen.example,+49-555-0402,email_only,Chairs the Valen family council and governance committee,confidential
+P009,Daniel Weber,A004,External CEO,Executive,no,n/a,daniel.weber@valen.example,+49-555-0403,email_only,Professional CEO working with the Valen family on operating governance,confidential
+P010,Timo Elmbach,A005,Co-CEO,Family executive,yes,Third generation,timo.elmbach@elmbach.example,+49-555-0501,shareable_business,Co-leads Elmbach Robotics and explores automation partnerships,standard
+P011,Greta Elmbach,A005,Technology Director,Family executive,yes,Third generation,greta.elmbach@elmbach.example,+49-555-0502,email_only,Oversees industrial robotics applications and pilot programs,standard
+P012,Maren Schulz,A006,Investment Principal,Executive,no,n/a,maren.schulz@lumengrid.example,+49-555-0601,shareable_business,Leads digital infrastructure investments at LumenGrid Capital,standard
+P013,Otto Reinhardt,A006,Managing Partner,Executive,no,n/a,otto.reinhardt@lumengrid.example,+49-555-0602,email_only,Oversees infrastructure investment strategy,standard
+P014,Nora Veyra,A010,Managing Director,Family executive,yes,Third generation,nora.veyra@veyra.example,+49-555-1001,shareable_business,Leads strategy for Veyra Mobility's industrial-vehicle components business,standard
+P015,Konrad Veyra,A010,Senior Adviser,Family member,yes,Second generation,konrad.veyra@veyra.example,+49-555-1002,email_only,Advises on family ownership matters at Veyra Mobility,standard
+P016,Mika Sato,A003,President,Family executive,yes,Second generation,mika.sato@cardso.example,+81-555-0301,shareable_business,Leads Cardso Precision and participates in Asian manufacturing programs,standard
+P017,Ren Ito,A003,Operations Director,Executive,no,n/a,ren.ito@cardso.example,+81-555-0302,email_only,Oversees plant operations and supplier coordination,standard
+P018,Soo-jin Park,A007,Co-CEO,Family executive,yes,Third generation,soojin.park@hansei.example,+82-555-0701,email_only,Co-leads Hansei Textiles during a staged ownership transition,confidential
+P019,Jae Park,A007,Family Council Member,Family member,yes,Second generation,jae.park@hansei.example,+82-555-0702,restricted,Participates in family council discussions related to succession timing,restricted
+P020,Anika Rao,A008,Deputy Chair,Family executive,yes,Third generation,anika.rao@aruna.example,+91-555-0801,shareable_business,Works on family governance and next-generation operating roles at Aruna Foods,confidential
+P021,Ravi Rao,A008,Chair,Family executive,yes,Second generation,ravi.rao@aruna.example,+91-555-0802,email_only,Chair of Aruna Foods and sponsor of ownership-transition planning,confidential
+P022,Lito Marquez,A009,Operations Chair,Family executive,yes,Second generation,lito.marquez@pacificalloy.example,+63-555-0901,email_only,Former operating chair referenced in older succession planning notes,standard
+P023,Maya Marquez,A009,Board Observer,Family member,yes,Third generation,maya.marquez@pacificalloy.example,+63-555-0902,shareable_business,Participates occasionally in next-generation industrial programming,standard
+P024,Kaito Morita,A018,CEO,Family executive,yes,Second generation,kaito.morita@miyako.example,+81-555-1801,email_only,CEO of Miyako Nutrition during professional-management expansion,standard
+P025,Emi Morita,A018,Next Generation Representative,Family member,yes,Third generation,emi.morita@miyako.example,+81-555-1802,shareable_business,Participates in next-generation leadership programming,standard
+P026,Jonas Brindle,A011,Managing Director,Family executive,yes,Third generation,jonas.brindle@brindle.example,+44-555-1101,shareable_business,Leads Brindle Packaging's renewable materials work,standard
+P027,Sofia Brindle,A011,Innovation Lead,Family executive,yes,Third generation,sofia.brindle@brindle.example,+44-555-1102,email_only,Works on renewable packaging pilots and customer partnerships,standard
+P028,Celia Varin,A015,Chair,Family executive,yes,Second generation,celia.varin@caelum.example,+33-555-1501,shareable_business,Chairs Caelum Ceramics and maintains several European industrial relationships,standard
+P029,Luc Varin,A015,Technical Director,Family executive,yes,Third generation,luc.varin@caelum.example,+33-555-1502,email_only,Leads advanced ceramic component programs,standard
+P030,Arun Mallick,A014,Managing Director,Family executive,yes,Second generation,arun.mallick@senda.example,+65-555-1401,shareable_business,Leads Senda Maritime and hosts selected Singapore member gatherings,standard
+P031,Mei Tan,A014,Events Liaison,Executive,no,n/a,mei.tan@senda.example,+65-555-1402,shareable_business,Coordinates local arrangements for Singapore dinners and port visits,standard
+P032,Lina Haddad,A016,CEO,Family executive,yes,Third generation,lina.haddad@orenko.example,+971-555-1601,email_only,Leads Orenko Logistics regional expansion,standard
+P033,Samir Haddad,A016,Family Council Chair,Family member,yes,Second generation,samir.haddad@orenko.example,+971-555-1602,restricted,Family council chair for Orenko Logistics,confidential
+P034,Clara Tannen,A017,Managing Director,Family executive,yes,Third generation,clara.tannen@tannenwerk.example,+49-555-1701,shareable_business,Leads modular building systems at TannenWerk Systems,standard
+P035,Bruno Tannen,A017,Technical Adviser,Family member,yes,Second generation,bruno.tannen@tannenwerk.example,+49-555-1702,email_only,Advises on technical partnerships and facilities strategy,standard
+P036,Mara Kessler,A012,Founder,Founder,no,n/a,mara.kessler@solmere.example,+34-555-1201,shareable_business,Founder of Solmere Renewables and commercial solar developer,standard
+P037,Evan Rook,A013,President,Family executive,yes,Third generation,evan.rook@atlashearth.example,+1-555-1301,email_only,Leads Atlas Hearth Appliances and attends North American programs,standard
+P038,Noa Rook,A013,Family Council Member,Family member,yes,Fourth generation,noa.rook@atlashearth.example,+1-555-1302,shareable_business,Participates in next-generation family enterprise sessions,standard
+P039,Amira Holt,,Program Lead,Internal staff,n/a,n/a,amira.holt@membership.example,+49-555-9001,internal_only,Fictional internal program lead for European manufacturing events,internal
+P040,Julian Cato,,External Speaker,External speaker,n/a,n/a,julian.cato@summitfaculty.example,+49-555-9002,email_only,Fictional external speaker on industrial automation,standard
+P041,Mara Voss,,Founder,Internal founder,n/a,n/a,mara.voss@membership.example,+49-555-9003,internal_only,Fictional founder of the membership organization and internal account lead for selected accounts,internal
