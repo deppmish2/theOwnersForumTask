@@ -36,9 +36,7 @@ solution/eval/transcript.md
 
 # Generated output
 output/*
-!output/pdf/
-output/pdf/*
-!output/pdf/owners_forum_case_study_solution.pdf
+!output/owners_forum_case_study_solution.pdf
 
 # Optional JavaScript installs
 node_modules/
