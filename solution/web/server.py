@@ -1,7 +1,8 @@
 """Local web UI for the Owners Forum assistant.
 
-Stdlib only. Binds to 127.0.0.1 — this is a local review tool, not a
-deployable service (no auth, no multi-tenancy; see NOTES.md).
+Stdlib only. Binds to 127.0.0.1 for local review. The same root page is
+shared with the Vercel entrypoint in api/index.py, while the API handlers live
+in api/.
 
     python3 -m solution.web.server        # then open http://127.0.0.1:8765
 """
@@ -9,53 +10,16 @@ deployable service (no auth, no multi-tenancy; see NOTES.md).
 from __future__ import annotations
 
 import json
-import secrets
 import sys
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from solution.assistant.engine import Engine  # noqa: E402
-from solution.assistant.data import Store  # noqa: E402
 from solution.assistant import llm  # noqa: E402
-from solution.assistant.narrate import natural_text  # noqa: E402
+from solution.web.app import ask_payload, bootstrap_payload, index_html_bytes  # noqa: E402
 
 HOST, PORT = "127.0.0.1", 8765
-STATIC = Path(__file__).parent / "index.html"
-
-# one Store shared by every session (read-only); one Engine per browser session
-_STORE = Store()
-_SESSIONS: dict[str, Engine] = {}
-
-EXAMPLES = {
-    "Core prompts": [
-        "Which member guests are attending the Berlin Manufacturing Forum?",
-        "note: Priya mentioned they may expand the Osaka hub next year",
-        "Show recent activity for Northstar Holdings",
-        "Which accounts have recent succession or ownership activity in Asia?",
-        "Which German family-owned industrials are active in data centers?",
-        "Prep call notes for an upcoming Valen Group call",
-        "Is Meridian Foods attending the Berlin dinner?",
-        "Has Cardso Precision been involved in Asian events?",
-        "Who potentially knows someone at Hansei Textiles?",
-        "What do we know about Priya Kapoor?",
-        "Give me Priya Kapoor's contact details",
-    ],
-    "Bonus prompts": [
-        "Which families are preparing for a sale or ownership change?",
-        "Is Valen Group active in data centers?",
-        "Tell me everything about Daniel Weber's succession plans",
-        "Who should I contact about the Singapore dinner?",
-        "Is Northstar Holdings active in renewable packaging?",
-    ],
-}
-
-
-def _engine_for(sid: str) -> Engine:
-    if sid not in _SESSIONS:
-        _SESSIONS[sid] = Engine(store=_STORE)
-    return _SESSIONS[sid]
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -78,14 +42,9 @@ class Handler(BaseHTTPRequestHandler):
     # ------------------------------------------------------------------- GET
     def do_GET(self):
         if self.path in ("/", "/index.html"):
-            self._send(200, STATIC.read_bytes(), "text/html; charset=utf-8")
+            self._send(200, index_html_bytes(), "text/html; charset=utf-8")
         elif self.path == "/api/bootstrap":
-            self._json({
-                "examples": EXAMPLES,
-                "llm_available": llm.available(),
-                "counts": {name: len(rows) for name, rows in _STORE.tables.items()},
-                "session_id": secrets.token_hex(8),
-            })
+            self._json(bootstrap_payload())
         else:
             self._json({"error": "not found"}, 404)
 
@@ -102,34 +61,8 @@ class Handler(BaseHTTPRequestHandler):
         question = (req.get("question") or "").strip()
         sid = req.get("session_id") or "default"
         use_llm = bool(req.get("use_llm"))
-        if not question:
-            return self._json({"error": "empty question"}, 400)
-
-        engine = _engine_for(sid)
-        try:
-            answer = engine.ask(question)
-        except Exception as exc:  # never 500 the UI on a bad parse
-            return self._json({"mode": "refuse",
-                               "text": f"The assistant could not handle that input ({exc}).",
-                               "citations": [], "flags": [], "prose": None,
-                               "notes": []})
-
-        prose = None
-        if use_llm and answer.mode == "answer" and llm.available():
-            try:
-                prose = natural_text(llm.compose(question, answer.render()))
-            except Exception as exc:
-                prose = f"(Claude layer unavailable this turn: {exc})"
-
-        return self._json({
-            "mode": answer.mode,
-            "answer": natural_text(answer.prose),
-            "detail": natural_text(answer.text),
-            "citations": answer.citations,
-            "flags": [natural_text(flag) for flag in answer.flags],
-            "prose": prose,                  # optional Claude rewrite
-            "notes": engine.session.all(),
-        })
+        payload, code = ask_payload(question, sid, use_llm)
+        return self._json(payload, code)
 
 
 def main() -> None:

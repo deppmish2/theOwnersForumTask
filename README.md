@@ -45,6 +45,39 @@ Then open:
 http://127.0.0.1:8765/
 ```
 
+## Deploy on Vercel
+
+This repo now includes a Vercel configuration in `vercel.json`, a shared root
+page in `index.html`, and Python function entrypoints in `api/`.
+
+Expected deployed routes:
+
+- `/` serves the web interface
+- `/api/bootstrap` serves startup metadata
+- `/api/ask` handles assistant requests
+
+Typical deploy flow:
+
+```bash
+npm i -g vercel
+vercel
+```
+
+Vercel layout:
+
+- `index.html` contains the shared web interface markup
+- `api/index.py` routes Vercel requests for `/`, `/api/bootstrap`, and `/api/ask`
+- `api/bootstrap.py` and `api/ask.py` remain focused API entrypoints for
+  environments that map those files directly
+
+Important note:
+
+- The deployed app works on Vercel, but session notes remain in process memory.
+- On Vercel, function instances are not guaranteed to be long lived, so
+  session notes are best effort rather than durable storage.
+- If you wanted production grade note persistence, the next step would be an
+  external store such as Redis or Postgres.
+
 ## Other ways to run it
 
 Run the CLI:
@@ -109,6 +142,8 @@ restarts.
 README.md
 EXPLANATION.md
 requirements.txt
+vercel.json
+index.html
 Case-Study-Briefing_Senior-AI-Engineer.pdf
 policies.md
 data/
@@ -119,6 +154,10 @@ data/
   people.csv
   relationships.csv
   sources.csv
+api/
+  index.py
+  ask.py
+  bootstrap.py
 solution/
   NOTES.md
   assistant/
@@ -133,7 +172,6 @@ solution/
   eval/
     run_eval.py
   web/
-    index.html
     server.py
 ```
 

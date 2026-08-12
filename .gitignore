@@ -27,6 +27,7 @@ ENV/
 
 # Editor and local assistant state
 .claude/
+.vercel/
 
 # Temporary working files
 tmp/
