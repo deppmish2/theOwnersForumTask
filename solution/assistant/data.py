@@ -3,6 +3,8 @@
 The dataset is a closed world (~130 rows). Deterministic joins on
 account_id / person_id / event_id / source_id beat semantic search at this
 scale and keep citations exact.
+
+CSV column expectations are aligned with the provided data_dictionary.md.
 """
 
 from __future__ import annotations
@@ -15,6 +17,42 @@ FILES = [
     "accounts", "people", "events", "event_attendance",
     "activities", "relationships", "sources",
 ]
+
+EXPECTED_COLUMNS = {
+    "accounts": [
+        "account_id", "account_name", "country", "region", "sector",
+        "subsector", "ownership_type", "membership_status", "account_manager",
+        "family_owned", "business_description", "tags", "sensitivity_level",
+    ],
+    "people": [
+        "person_id", "full_name", "account_id", "role_title",
+        "relationship_to_company", "is_family_member", "generation", "email",
+        "phone", "contact_visibility", "bio_note", "sensitivity_level",
+    ],
+    "events": [
+        "event_id", "event_name", "city", "region", "event_date",
+        "event_type", "status", "description",
+    ],
+    "event_attendance": [
+        "attendance_id", "event_id", "person_id", "account_id",
+        "attendance_status", "attendee_category", "rsvp_date", "source_id",
+        "notes",
+    ],
+    "activities": [
+        "activity_id", "activity_date", "account_id", "person_id",
+        "activity_type", "title", "summary", "region", "themes", "visibility",
+        "sensitivity_level", "source_id",
+    ],
+    "relationships": [
+        "relationship_id", "from_person_id", "from_account_id", "to_person_id",
+        "to_account_id", "relationship_type", "strength", "basis",
+        "visibility", "source_id", "notes",
+    ],
+    "sources": [
+        "source_id", "source_type", "title", "publisher_or_origin",
+        "publication_date", "url", "excerpt", "reliability", "visibility",
+    ],
+}
 
 
 def _default_data_dir() -> Path:
@@ -36,7 +74,16 @@ class Store:
         for name in FILES:
             path = self.data_dir / f"{name}.csv"
             with open(path, newline="", encoding="utf-8") as f:
-                self.tables[name] = list(csv.DictReader(f))
+                reader = csv.DictReader(f)
+                expected = EXPECTED_COLUMNS[name]
+                actual = reader.fieldnames or []
+                if actual != expected:
+                    raise ValueError(
+                        f"{path.name} columns do not match data_dictionary.md.\n"
+                        f"Expected: {expected}\n"
+                        f"Actual:   {actual}"
+                    )
+                self.tables[name] = list(reader)
 
         # primary-key indexes
         self.people = {r["person_id"]: r for r in self.tables["people"]}

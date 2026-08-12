@@ -31,7 +31,7 @@ SECTIONS = [
             "Structured retrieval over the 7 CSVs: resolve entities, join rows, apply policy, then compose a cited answer.",
             "Deliberately not vector RAG: the dataset is small and ID driven, so deterministic joins are simpler and more exact.",
             "The LLM layer is optional and post gate only. It rewrites style, but does not retrieve or decide policy.",
-            "policy.py is the single rules file for contact visibility, sensitivity, staleness, and evidence labels.",
+            "policy.py implements the provided policies.md, and data.py validates the CSV schema against data_dictionary.md.",
         ],
     ),
     (
@@ -85,7 +85,7 @@ SECTIONS = [
         [
             "Contact visibility is enforced in code before composition, so restricted details never depend on prompt compliance.",
             "Restricted records are filtered before the optional LLM layer, so withheld content never enters model context.",
-            "policy.py keeps the rule layer explicit, so privacy and sensitivity handling stays readable in code.",
+            "The provided policies.md and data_dictionary.md are now reflected directly in policy.py and data.py.",
             "This is a trusted internal prototype, not a multi tenant system. Real deployment would need caller auth and role aware policy.",
             "Intent detection is still keyword based, so unusual phrasing should eventually move to a classifier with confidence thresholds.",
         ],

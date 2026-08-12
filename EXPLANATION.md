@@ -6,6 +6,9 @@ This prototype is not built as an LLM driven system. The main assistant is a
 deterministic, code based layer over a closed CSV dataset, so it does not need
 an API key to run.
 
+The current implementation is aligned against the recruiter provided
+`policies.md` and `data_dictionary.md`.
+
 The main flow is:
 
 1. Load the seven CSV files from `data/`
@@ -17,7 +20,8 @@ The main flow is:
 ## Main files
 
 - `solution/assistant/data.py`
-  Loads the CSV files into memory and builds simple indexes.
+  Loads the CSV files into memory, validates the expected schema, and builds
+  simple indexes.
 
 - `solution/assistant/resolve.py`
   Detects intent and resolves entities such as people, accounts, and events.
@@ -68,6 +72,8 @@ That means:
   simpler and easier to audit than semantic retrieval.
 - Policy decisions are easier to review when they live in code instead of in a
   prompt.
+- The provided `policies.md` and `data_dictionary.md` map cleanly onto explicit
+  code paths, which keeps behavior testable and reviewable.
 - Keeping session notes in memory avoids mixing temporary user statements with
   the source dataset.
 
@@ -76,12 +82,12 @@ That means:
 If the problem expanded into a larger graph, more varied language, and a mix of
 structured and unstructured data, a model would become more useful.
 
-In that setting I would use a model for:
+In that setting we would use a model for:
 
 1. Translating open ended requests into structured query plans
 2. Mapping fuzzy user phrasing onto graph entities and relationships
 3. Ranking or summarizing larger evidence sets
 4. Handling more complex multi step follow ups
 
-I would still keep policy enforcement, source grounding, and final citation
+We keep policy enforcement, source grounding, and final citation
 checks in deterministic code.

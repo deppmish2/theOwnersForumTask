@@ -110,12 +110,12 @@
         </div>
       </header>
 
-      <!-- MISSING FILES CALLOUT -->
+      <!-- SOURCE FILES CALLOUT -->
       <div role="alert" class="alert alert-warning alert-soft mb-12 items-start">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         <div class="text-sm">
-          <div class="font-semibold mb-1">Gap found in your folder</div>
-          <div class="opacity-90">Brief references <code>policies.md</code>, <code>data_dictionary.md</code>, <code>prompts.md</code> — none are present, only 7 CSVs + the PDF. Everything below on policy is reconstructed from the PDF summary. Worth confirming those files don't exist before building against edge cases you can't see.</div>
+          <div class="font-semibold mb-1">Source files now present</div>
+          <div class="opacity-90">The recruiter provided <code>policies.md</code> and <code>data_dictionary.md</code>. The current implementation can align its rule layer and CSV expectations directly against them.</div>
         </div>
       </div>
 
@@ -204,7 +204,7 @@ graph TD
       <!-- SECTION 4: POLICY RULES -->
       <section id="policy" class="mb-16">
         <h2 class="text-xl font-bold mb-1">4 · Policy rules to enforce</h2>
-        <p class="text-xs text-base-content/50 mb-4">Reconstructed from the PDF (p.6) — verify against the real <code>policies.md</code> if you can get it.</p>
+        <p class="text-xs text-base-content/50 mb-4">Aligned to the provided <code>policies.md</code> file.</p>
 
         <div class="text-xs font-semibold uppercase tracking-wide text-base-content/50 mb-2">Contact-detail visibility</div>
         <div class="overflow-x-auto rounded-box border border-base-content/10 mb-6">
@@ -280,7 +280,7 @@ flowchart TD
               <tr><td class="font-semibold text-sm">Session notes</td><td class="text-xs">Separate append-only store, never written into CSVs; cited as "session note".</td></tr>
               <tr><td class="font-semibold text-sm">Decision logic</td><td class="text-xs">The 4-mode gate in §6 — specific triggers per mode.</td></tr>
               <tr><td class="font-semibold text-sm">Evaluation</td><td class="text-xs">Run all 15 prompts as a regression set; score grounding, citations, visibility compliance.</td></tr>
-              <tr><td class="font-semibold text-sm">Privacy &amp; limits</td><td class="text-xs">Synthetic data; contact_visibility is the main real-world risk; known gaps (missing policies.md).</td></tr>
+              <tr><td class="font-semibold text-sm">Privacy &amp; limits</td><td class="text-xs">Synthetic data; contact_visibility is the main real-world risk; real deployment still needs caller auth and role-aware policy.</td></tr>
             </tbody>
           </table>
         </div>
@@ -348,7 +348,7 @@ flowchart TD
       </section>
 
       <footer class="text-xs text-base-content/50 border-t border-base-300 pt-6 mt-10">
-        Built from <code>Case-Study-Briefing_Senior-AI-Engineer.pdf</code> and the 7 CSVs. Reference files named in the brief (<code>policies.md</code>, <code>data_dictionary.md</code>, <code>prompts.md</code>) were not found — flagged above.
+        Built from <code>Case-Study-Briefing_Senior-AI-Engineer.pdf</code>, the 7 CSVs, and the provided <code>policies.md</code> and <code>data_dictionary.md</code>.
       </footer>
 
     </main>

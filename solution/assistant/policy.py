@@ -1,7 +1,6 @@
 """Policy gate: contact visibility, evidence labeling, sensitivity, staleness.
 
-Rules reconstructed from the case-study briefing (policies.md was not
-included in the provided folder — flagged in NOTES.md).
+Rules are aligned with the provided policies.md file.
 """
 
 from __future__ import annotations

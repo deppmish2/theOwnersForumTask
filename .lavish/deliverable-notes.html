@@ -114,7 +114,7 @@
               <li>Structured retrieval over 7 CSVs: resolve entities, join rows, apply policy, then compose a cited answer.</li>
               <li>No vector RAG: the dataset is small and ID-driven, so deterministic joins are simpler and more exact.</li>
               <li>The LLM layer is optional and post-gate only; it improves style, but does not retrieve or decide policy.</li>
-              <li><code>policy.py</code> is the single rules file for visibility, sensitivity, staleness, and evidence labels.</li>
+              <li><code>policy.py</code> implements the provided <code>policies.md</code>, and <code>data.py</code> validates the CSV schema against <code>data_dictionary.md</code>.</li>
             </ul>
           </section>
 
@@ -174,7 +174,7 @@
             <ul class="list-disc pl-5 tight gold-body">
               <li>Contact visibility is enforced in code before composition, so restricted details never depend on prompt compliance.</li>
               <li>Restricted records are filtered before the optional LLM layer, so withheld content never enters model context.</li>
-              <li><code>policy.py</code> keeps the rule layer explicit, so privacy and sensitivity handling stays readable in code.</li>
+              <li>The provided <code>policies.md</code> and <code>data_dictionary.md</code> are now reflected directly in <code>policy.py</code> and <code>data.py</code>.</li>
               <li>This is a trusted-internal prototype, not a multi-tenant system; real deployment would need caller auth and role-aware policy.</li>
               <li>Intent detection is still keyword-based, so unusual phrasing should eventually move to a classifier with confidence thresholds.</li>
             </ul>

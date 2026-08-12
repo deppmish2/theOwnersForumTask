@@ -10,7 +10,7 @@ documentation length.
 - Structured retrieval over the 7 CSVs: resolve entities → join rows → policy gate → grounded answer with citations.
 - Deliberately not vector RAG: the dataset is small and ID-driven, so deterministic joins are simpler and more exact.
 - The LLM layer is optional and post-gate only; it rewrites style, but does not retrieve or decide policy.
-- `policy.py` is the single rules file for contact visibility, sensitivity, staleness, and evidence labels.
+- `policy.py` implements the provided `policies.md`, and `data.py` validates the CSV schema against `data_dictionary.md`.
 
 ## 2. Context / memory note
 
@@ -52,6 +52,6 @@ documentation length.
 
 - Contact visibility is enforced in code before composition, so restricted details never depend on prompt compliance.
 - Restricted records are filtered before the optional LLM layer, so withheld content never enters model context.
-- `policies.md` is reconstructed locally from the PDF summary, but `data_dictionary.md` and `prompts.md` are still missing source-of-truth inputs.
+- The recruiter provided `policies.md` and `data_dictionary.md`, and the implementation has been reconciled against both.
 - This is a trusted-internal prototype, not a multi-tenant system; real deployment would need caller auth and role-aware policy.
 - Intent detection is still keyword-based, so unusual phrasing should eventually move to a classifier with confidence thresholds.

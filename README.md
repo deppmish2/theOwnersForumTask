@@ -9,7 +9,7 @@ provided CSV dataset, and a small regression suite.
 - Seven deliverable notes in `solution/NOTES.md`
 - Short implementation explanation in `EXPLANATION.md`
 - CSV dataset in `data/`
-- Reconstructed `policies.md` from the PDF summary
+- Provided `policies.md` and `data_dictionary.md`
 - Regression evaluation in `solution/eval/run_eval.py`
 
 ## Requirements
@@ -77,6 +77,10 @@ and defend than making a model part of the core decision path.
 The optional model layer in `solution/assistant/llm.py` is only a final prose
 rewrite step. It does not do retrieval or policy decisions, and the system runs
 fully without it.
+
+The code is now aligned against the recruiter provided `policies.md` and
+`data_dictionary.md`. CSV loading validates the expected schema on startup, and
+the policy module reflects the supplied rule definitions.
 
 For a short implementation overview, see `EXPLANATION.md`.
 
@@ -155,9 +159,9 @@ python3 -m solution.assistant.cli
 
 Then use `/llm on` inside the CLI.
 
-## Known input gap
+## Source files
 
-The briefing references `policies.md`, `data_dictionary.md`, and `prompts.md`
-as source files. In this workspace, `policies.md` has been reconstructed from
-the PDF summary page, while `data_dictionary.md` and `prompts.md` were not
-provided. The executable rule layer lives in `solution/assistant/policy.py`.
+The recruiter provided `policies.md` and `data_dictionary.md`, and the current
+implementation has been reconciled against both. The executable rule layer
+lives in `solution/assistant/policy.py`, and CSV schema checks live in
+`solution/assistant/data.py`.
